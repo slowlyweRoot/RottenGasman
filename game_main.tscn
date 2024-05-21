@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://k0v0rxas4n71"]
+
+[ext_resource type="PackedScene" uid="uid://dfqs4annapwko" path="res://gasman.tscn" id="1_ama2x"]
+[ext_resource type="PackedScene" uid="uid://ct4cbp1wkpy4l" path="res://tile_map.tscn" id="2_dnsl5"]
+
+[node name="GameMain" type="Node2D"]
+
+[node name="Gasman" parent="." instance=ExtResource("1_ama2x")]
+position = Vector2(557, 333)
+
+[node name="TileMap" parent="." instance=ExtResource("2_dnsl5")]
