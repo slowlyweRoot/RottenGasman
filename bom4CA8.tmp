@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpw76q3iq4k8g"]
+
+[ext_resource type="Script" path="res://bomb.gd" id="1_0lp7x"]
+[ext_resource type="Texture2D" uid="uid://qv1x2804dlpb" path="res://bombs.png" id="1_7a5ik"]
+[ext_resource type="Shader" path="res://bomb.gdshader" id="2_qh1c6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k2pwf"]
+shader = ExtResource("2_qh1c6")
+shader_parameter/time = 0.0
+
+[node name="bomb" type="Node2D"]
+top_level = true
+script = ExtResource("1_0lp7x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_k2pwf")
+texture = ExtResource("1_7a5ik")
+hframes = 4
+vframes = 2
+frame = 4

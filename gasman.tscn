@@ -104,6 +104,7 @@ radius = 8.0
 
 [node name="Gasman" type="CharacterBody2D"]
 top_level = true
+platform_floor_layers = 0
 script = ExtResource("1_1qe6d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
