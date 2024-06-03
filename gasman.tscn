@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfqs4annapwko"]
+[gd_scene load_steps=18 format=3 uid="uid://dfqs4annapwko"]
 
 [ext_resource type="Script" path="res://Gasman.gd" id="1_1qe6d"]
-[ext_resource type="Texture2D" uid="uid://bxsekdmgnqpw" path="res://Green-Cap-Character-16x18.png" id="2_cn1yl"]
+[ext_resource type="Texture2D" uid="uid://bxsekdmgnqpw" path="res://assets/Green-Cap-Character-16x18.png" id="2_cn1yl"]
+[ext_resource type="Texture2D" uid="uid://qs17a38ig0w8" path="res://assets/sokoban_tilesheet.png" id="3_kkb4i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2g03"]
 radius = 6.0
@@ -102,6 +103,98 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_huksy"]
 radius = 8.0
 
+[sub_resource type="Animation" id="Animation_x1qu7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_r55na"]
+resource_name = "walk_down"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(1, 5), Vector2i(2, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_sqpgn"]
+resource_name = "walk_left"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(3, 7), Vector2i(4, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_q6c2g"]
+resource_name = "walk_right"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_2a753"]
+resource_name = "walk_up"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(4, 5), Vector2i(5, 5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ss7qo"]
+_data = {
+"RESET": SubResource("Animation_x1qu7"),
+"walk_down": SubResource("Animation_r55na"),
+"walk_left": SubResource("Animation_sqpgn"),
+"walk_right": SubResource("Animation_q6c2g"),
+"walk_up": SubResource("Animation_2a753")
+}
+
 [node name="Gasman" type="CharacterBody2D"]
 top_level = true
 platform_floor_layers = 0
@@ -112,6 +205,7 @@ position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_f2g03")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 texture = ExtResource("2_cn1yl")
 hframes = 3
@@ -130,7 +224,6 @@ disabled = true
 debug_color = Color(0.906929, 0.302087, 0, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
@@ -142,3 +235,14 @@ drag_top_margin = 0.39
 drag_right_margin = 0.39
 drag_bottom_margin = 0.43
 editor_draw_limits = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("3_kkb4i")
+hframes = 13
+vframes = 8
+frame = 65
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D2"]
+libraries = {
+"": SubResource("AnimationLibrary_ss7qo")
+}

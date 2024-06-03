@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://ddpyw1tbaaign"]
+
+[ext_resource type="Texture2D" uid="uid://dy2raeq22fc2y" path="res://assets/particlesIfNeeded/fire_02.png" id="1_4dml5"]
+[ext_resource type="Script" path="res://bombexplody.gd" id="1_dbiug"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvvw3"]
+size = Vector2(64, 64)
+
+[sub_resource type="Curve" id="Curve_p76r8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.213333, 1), 0.0, 0.0, 0, 0, Vector2(0.866667, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_v5io7"]
+curve = SubResource("Curve_p76r8")
+
+[sub_resource type="Gradient" id="Gradient_52wm7"]
+offsets = PackedFloat32Array(0, 0.491803, 1)
+colors = PackedColorArray(3.244, 1, 1, 1, 1, 0.635294, 0.533333, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_66tlp"]
+gradient = SubResource("Gradient_52wm7")
+
+[sub_resource type="CurveTexture" id="CurveTexture_6cw13"]
+
+[sub_resource type="Curve" id="Curve_5j466"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.34, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_djr5g"]
+curve = SubResource("Curve_5j466")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_37pm8"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 158.258
+angular_velocity_min = -97.08
+angular_velocity_max = 80.9
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_djr5g")
+scale_over_velocity_max = 944.97
+color = Color(1, 0.470588, 0.231373, 1)
+color_ramp = SubResource("GradientTexture1D_66tlp")
+alpha_curve = SubResource("CurveTexture_v5io7")
+emission_curve = SubResource("CurveTexture_6cw13")
+hue_variation_max = 0.09
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uc0fv"]
+size = Vector2(55, 55)
+
+[node name="bombexplody" type="Node2D"]
+top_level = true
+script = ExtResource("1_dbiug")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+contact_monitor = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_rvvw3")
+disabled = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 7
+process_material = SubResource("ParticleProcessMaterial_37pm8")
+texture = ExtResource("1_4dml5")
+one_shot = true
+explosiveness = 0.85
+randomness = 1.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_uc0fv")
+debug_color = Color(0.929412, 0.262745, 0.0470588, 1)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

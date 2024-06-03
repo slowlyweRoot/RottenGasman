@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform float detonatetimer : hint_range(1.0,10.0);
+uniform float detonatetimer : hint_range(1.0,25.0);
 void fragment() {		
     vec4 uv = texture(TEXTURE, UV);
     // Calculate the scale factor oscillating between 0.5 and 1.5

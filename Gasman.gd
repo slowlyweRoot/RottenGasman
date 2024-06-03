@@ -1,9 +1,12 @@
 extends CharacterBody2D
-@export var speed = 180
+@export var speed:int= 600
+@export var playerHealth:int=2
+var bombDamage=1
 var timer = 0
 var rewindList = []
 var isRewinding = false
-
+func _ready():
+	pass
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
@@ -12,15 +15,15 @@ func _physics_process(delta):
 	get_input()
 	move_and_slide()	
 	if velocity.y > 0:
-		$Sprite2D/AnimationPlayer.play("walk_down")
+		$Sprite2D2/AnimationPlayer.play("walk_down")
 	elif velocity.y < 0:
-		$Sprite2D/AnimationPlayer.play("walk_up")
+		$Sprite2D2/AnimationPlayer.play("walk_up")
 	elif velocity.x > 0 :
-		$Sprite2D/AnimationPlayer.play("walk_right")
+		$Sprite2D2/AnimationPlayer.play("walk_right")
 	elif velocity.x < 0 :
-		$Sprite2D/AnimationPlayer.play("walk_left")
+		$Sprite2D2/AnimationPlayer.play("walk_left")
 	else:
-		$Sprite2D/AnimationPlayer.play("idle_front")
+		$Sprite2D2/AnimationPlayer.play("RESET")
 	
 	timer += delta
 	if timer>0.1 &&isRewinding ==false:
@@ -29,6 +32,7 @@ func _physics_process(delta):
 		rewindList.append(position)
 	if Input.is_action_just_pressed("rewind"):
 		rewind()
+		
 	if Input.is_action_just_pressed("bomb"):
 		bomb()
 
@@ -51,10 +55,18 @@ func rewind():
 		position = rewindList[-(i+1)]		
 	isRewinding=false	
 	rewindList=[]
-
+	
+	
 func bomb():
 	const BOMB =preload("res://bomb.tscn")
 	var newBomb = BOMB.instantiate()	
 	newBomb.global_position = $".".global_position
 	$".".add_child(newBomb)
-	print("added bomb")
+	#print("added bomb")
+
+func take_damage():
+	print("kek")
+	playerHealth = playerHealth - bombDamage
+	if playerHealth <=0:
+		queue_free()
+	
