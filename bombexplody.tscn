@@ -48,15 +48,17 @@ emission_curve = SubResource("CurveTexture_6cw13")
 hue_variation_max = 0.09
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uc0fv"]
-size = Vector2(55, 55)
+size = Vector2(50, 50)
 
 [node name="bombexplody" type="Node2D"]
+show_behind_parent = true
 top_level = true
 script = ExtResource("1_dbiug")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
 gravity_scale = 0.0
-contact_monitor = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("RectangleShape2D_rvvw3")
@@ -71,7 +73,9 @@ one_shot = true
 explosiveness = 0.85
 randomness = 1.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["explosion"]]
+collision_layer = 8
+collision_mask = 4294967295
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_uc0fv")

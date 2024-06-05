@@ -1,0 +1,70 @@
+[gd_scene load_steps=13 format=3 uid="uid://cnahwy7banmsh"]
+
+[ext_resource type="Script" path="res://smokerz.gd" id="1_0nm5g"]
+[ext_resource type="Texture2D" uid="uid://bbeg8gq78j3nn" path="res://assets/smokeCircle/smokeSprite.png" id="1_8fxts"]
+[ext_resource type="Script" path="res://smokerz2d.gd" id="1_b8hru"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hfn48"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_1upda"]
+_data = [Vector2(0.00666666, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l1wsw"]
+curve = SubResource("Curve_1upda")
+
+[sub_resource type="Gradient" id="Gradient_1tve7"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tbdeq"]
+gradient = SubResource("Gradient_1tve7")
+
+[sub_resource type="Curve" id="Curve_q12ox"]
+_data = [Vector2(0.02, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.516483), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7n5io"]
+curve = SubResource("Curve_q12ox")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lkb0k"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 100.0
+tangential_accel_max = 100.0
+scale_min = 0.2
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_7n5io")
+color = Color(0, 0.976471, 0, 1)
+color_initial_ramp = SubResource("GradientTexture1D_tbdeq")
+alpha_curve = SubResource("CurveTexture_l1wsw")
+hue_variation_min = -0.16
+hue_variation_max = -0.15
+anim_speed_min = 1.22
+anim_speed_max = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v6bgh"]
+radius = 9.05539
+
+[node name="smokerz" type="Node2D"]
+z_index = 1
+script = ExtResource("1_0nm5g")
+
+[node name="smokerz2d" type="CharacterBody2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_b8hru")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="smokerz2d"]
+material = SubResource("CanvasItemMaterial_hfn48")
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_lkb0k")
+texture = ExtResource("1_8fxts")
+lifetime = 1.5
+explosiveness = 0.25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="smokerz2d"]
+shape = SubResource("CircleShape2D_v6bgh")

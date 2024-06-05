@@ -1,6 +1,6 @@
 extends CharacterBody2D
 @export var speed:int= 600
-@export var playerHealth:int=2
+@export var playerHealth:int=999
 var bombDamage=1
 var timer = 0
 var rewindList = []
@@ -64,9 +64,11 @@ func bomb():
 	$".".add_child(newBomb)
 	#print("added bomb")
 
-func take_damage():
+func take_damage():	
 	print("kek")
 	playerHealth = playerHealth - bombDamage
 	if playerHealth <=0:
 		queue_free()
-	
+	#animate take damage fzzz
+
+

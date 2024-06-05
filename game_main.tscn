@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://k0v0rxas4n71"]
+[gd_scene load_steps=5 format=3 uid="uid://k0v0rxas4n71"]
 
 [ext_resource type="Script" path="res://game_main.gd" id="1_165v6"]
 [ext_resource type="PackedScene" uid="uid://dfqs4annapwko" path="res://gasman.tscn" id="1_ama2x"]
 [ext_resource type="PackedScene" uid="uid://dydynl771m8am" path="res://sokobanTilemap.tscn" id="2_xpgyj"]
+
+[sub_resource type="Curve2D" id="Curve2D_rtce3"]
+_data = {
+"points": PackedVector2Array(406.66, -456.087, -406.66, 456.087, -2523, -2044, 24, -840, -24, 840, -2853, -10, -248, -632, 248, 632, -2332, 1988, -1072, -8, 1072, 8, 388, 2868, -664, 616, 664, -616, 2691, 2133, 0, 0, 0, 0, 3212, -4, 248, 488, -248, -488, 2732, -1964, 1454.36, 6.09718, -1454.36, -6.09718, 130, -2747, 0, 0, 0, 0, -2481, -2061)
+}
+point_count = 9
 
 [node name="GameMain" type="Node2D"]
 script = ExtResource("1_165v6")
@@ -12,3 +18,17 @@ position = Vector2(538, 338)
 
 [node name="sokobantilemap" parent="." instance=ExtResource("2_xpgyj")]
 position = Vector2(-2000, -2000)
+
+[node name="cloudspawnpoints" type="Path2D" parent="."]
+curve = SubResource("Curve2D_rtce3")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="cloudspawnpoints"]
+unique_name_in_owner = true
+position = Vector2(-2523, -2044)
+rotation = 2.29897
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.299
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

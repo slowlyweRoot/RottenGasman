@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://qs17a38ig0w8" path="res://assets/sokoban_tilesheet.png" id="3_kkb4i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2g03"]
-radius = 6.0
+radius = 25.14
 
 [sub_resource type="Animation" id="Animation_fu3vw"]
 resource_name = "idle_front"
@@ -101,7 +101,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_huksy"]
-radius = 8.0
+radius = 25.0799
 
 [sub_resource type="Animation" id="Animation_x1qu7"]
 length = 0.001
@@ -195,14 +195,16 @@ _data = {
 "walk_up": SubResource("Animation_2a753")
 }
 
-[node name="Gasman" type="CharacterBody2D"]
+[node name="Gasman" type="CharacterBody2D" groups=["damageable"]]
 top_level = true
+z_index = 3
 platform_floor_layers = 0
 script = ExtResource("1_1qe6d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_f2g03")
+debug_color = Color(1, 0.0102092, 0.030341, 0.42)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -219,9 +221,10 @@ libraries = {
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_huksy")
 disabled = true
-debug_color = Color(0.906929, 0.302087, 0, 0.42)
+debug_color = Color(0.217426, 0.635092, 0.214278, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_smoothed = true
