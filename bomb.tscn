@@ -18,12 +18,10 @@ shader_parameter/detonatetimer = 1.0
 
 [node name="bomb" type="StaticBody2D"]
 top_level = true
-scale = Vector2(1, 1)
 collision_layer = 8
 script = ExtResource("1_0lp7x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_lvflq")
 debug_color = Color(0.998761, 0, 0.133327, 0.42)
 
@@ -47,36 +45,27 @@ frame = 1
 autostart = true
 
 [node name="RayCast2D1" type="RayCast2D" parent="."]
-scale = Vector2(2.5, 2.5)
-target_position = Vector2(240, 0)
+target_position = Vector2(320, 0)
 collision_mask = 32768
 script = ExtResource("4_0u2xc")
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
 rotation = 1.5708
-scale = Vector2(2.5, 2.5)
-target_position = Vector2(240, 0)
+target_position = Vector2(320, 0)
 collision_mask = 32768
 script = ExtResource("4_0u2xc")
 
 [node name="RayCast2D3" type="RayCast2D" parent="."]
 rotation = 3.14159
-scale = Vector2(2.5, 2.5)
-target_position = Vector2(240, 0)
+target_position = Vector2(320, 0)
 collision_mask = 32768
 hit_from_inside = true
 script = ExtResource("4_0u2xc")
 
 [node name="RayCast2D4" type="RayCast2D" parent="."]
 rotation = -1.5708
-scale = Vector2(2.5, 2.5)
-target_position = Vector2(240, 0)
+target_position = Vector2(320, 0)
 collision_mask = 32768
 script = ExtResource("4_0u2xc")
 
-[node name="bomb" type="Node2D" parent="." groups=["damageable"]]
-top_level = true
-scale = Vector2(2.5, 2.5)
-
-[connection signal="timeout" from="Timer" to="bomb" method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

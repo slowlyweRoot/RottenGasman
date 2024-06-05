@@ -21,7 +21,7 @@ func _on_timer_timeout():
 		#explode($RayCast2D.testOfHowmanyBombs+3)
 		isDetonated=true
 		$Sprite2D.visible=false
-		explod3()
+		_explod3()
 		await get_tree().create_timer(1).timeout 
 		queue_free()
 		#print($RayCast2D.testOfHowmanyBombs)
@@ -39,23 +39,23 @@ func _on_timer_timeout():
 	#)
 	
 	
-func explode(explosionSize):
-	#const BOMB_EXPLODE = preload("res://bombexplody.tscn")
-	#var newExplosion = BOMB_EXPLODE.instantiate()	
-	#newExplosion.global_position = self.global_position	
-	#self.add_child(newExplosion)
-	var listofVectors=[Vector2(64,0),Vector2(-64,0),Vector2(0,-64),Vector2(0,64)]
-	for i in range(4):
-		for j in range(explosionSize):
-			const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
-			var newExplosion2 = BOMB_EXPLODE2.instantiate()	
-			newExplosion2.global_position = self.global_position + (listofVectors[i]*j)			
-			self.add_child(newExplosion2)
+#func explode(explosionSize):
+	##const BOMB_EXPLODE = preload("res://bombexplody.tscn")
+	##var newExplosion = BOMB_EXPLODE.instantiate()	
+	##newExplosion.global_position = self.global_position	
+	##self.add_child(newExplosion)
+	#var listofVectors=[Vector2(64,0),Vector2(-64,0),Vector2(0,-64),Vector2(0,64)]
+	#for i in range(4):
+		#for j in range(explosionSize):
+			#const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
+			#var newExplosion2 = BOMB_EXPLODE2.instantiate()	
+			#newExplosion2.global_position = self.global_position + (listofVectors[i]*j)			
+			#self.add_child(newExplosion2)
 			
 	
 func take_damage():	
 	if !isDetonated:
-		explod3()
+		_explod3()
 		isDetonated=true
 		print("exploded")
 		await get_tree().create_timer(1).timeout 
@@ -63,32 +63,42 @@ func take_damage():
 	else:pass
 
 
-func explod3():
-	#const BOMB_EXPLODE = preload("res://bombexplody.tscn")
-	#var newExplosion = BOMB_EXPLODE.instantiate()	
-	#newExplosion.global_position = self.global_position	
-	#self.add_child(newExplosion)
+#func explod3():
+	##const BOMB_EXPLODE = preload("res://bombexplody.tscn")
+	##var newExplosion = BOMB_EXPLODE.instantiate()	
+	##newExplosion.global_position = self.global_position	
+	##self.add_child(newExplosion)
+	#var listofVectors=[Vector2(64,0),Vector2(0,64),Vector2(-64,0),Vector2(0,-64)]	
+	#for j in range($RayCast2D1.testOfHowmanyBombs+3):
+		#const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
+		#var newExplosion2 = BOMB_EXPLODE2.instantiate()	
+		#newExplosion2.global_position = self.global_position + (listofVectors[0]*j)			
+		#self.add_child(newExplosion2)
+	#for j in range($RayCast2D2.testOfHowmanyBombs+3):
+		#const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
+		#var newExplosion2 = BOMB_EXPLODE2.instantiate()	
+		#newExplosion2.global_position = self.global_position + (listofVectors[1]*j)			
+		#self.add_child(newExplosion2)
+	#for j in range($RayCast2D3.testOfHowmanyBombs+3):
+		#const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
+		#var newExplosion2 = BOMB_EXPLODE2.instantiate()	
+		#newExplosion2.global_position = self.global_position + (listofVectors[2]*j)			
+		#self.add_child(newExplosion2)
+	#for j in range($RayCast2D4.testOfHowmanyBombs+3):
+		#const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
+		#var newExplosion2 = BOMB_EXPLODE2.instantiate()	
+		#newExplosion2.global_position = self.global_position + (listofVectors[3]*j)			
+		#self.add_child(newExplosion2)
+
+func _explod3():
 	var listofVectors=[Vector2(64,0),Vector2(0,64),Vector2(-64,0),Vector2(0,-64)]	
-	for j in range($RayCast2D1.testOfHowmanyBombs+3):
-		const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
-		var newExplosion2 = BOMB_EXPLODE2.instantiate()	
-		newExplosion2.global_position = self.global_position + (listofVectors[0]*j)			
-		self.add_child(newExplosion2)
-	for j in range($RayCast2D2.testOfHowmanyBombs+3):
-		const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
-		var newExplosion2 = BOMB_EXPLODE2.instantiate()	
-		newExplosion2.global_position = self.global_position + (listofVectors[1]*j)			
-		self.add_child(newExplosion2)
-	for j in range($RayCast2D3.testOfHowmanyBombs+3):
-		const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
-		var newExplosion2 = BOMB_EXPLODE2.instantiate()	
-		newExplosion2.global_position = self.global_position + (listofVectors[2]*j)			
-		self.add_child(newExplosion2)
-	for j in range($RayCast2D4.testOfHowmanyBombs+3):
-		const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
-		var newExplosion2 = BOMB_EXPLODE2.instantiate()	
-		newExplosion2.global_position = self.global_position + (listofVectors[3]*j)			
-		self.add_child(newExplosion2)
-
-
+	for i in range(1,5): 
+		var raycastid ="RayCast2D" + str(i)		
+		for j in range(get_node(raycastid).testOfHowmanyBombs+2):
+			#print(get_node(raycastid).testOfHowmanyBombs)
+			const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
+			var newExplosion2 = BOMB_EXPLODE2.instantiate()	
+			newExplosion2.global_position = self.global_position + (listofVectors[i-1]*j)			
+			self.add_child(newExplosion2)
+		
 
