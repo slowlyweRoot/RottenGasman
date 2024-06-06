@@ -21,7 +21,7 @@ func spawn_crates():
 			if randf() > 0.6:	
 				const CRATE = preload("res://Crate.tscn")
 				var newCrate = CRATE.instantiate()
-				newCrate.global_position = CRATESPAWNPOINT + Vector2((j*64),(i*127.5))
+				newCrate.global_position = CRATESPAWNPOINT + Vector2((j*64),(i*128))
 				self.add_child(newCrate)
 	
 	for i in range (29):
@@ -29,20 +29,20 @@ func spawn_crates():
 				if randf() > 0.6:	
 					const CRATE = preload("res://Crate.tscn")
 					var newCrate = CRATE.instantiate()
-					newCrate.global_position = CRATESPAWNPOINT2 + Vector2((j*128),(i*127.5))
+					newCrate.global_position = CRATESPAWNPOINT2 + Vector2((j*128),(i*128))
 					self.add_child(newCrate)
 			
-func spawn_clouds():
-	while %PathFollow2D.progress_ratio <= 0.99:
-	#for i in range(10):
-		count += 1
-		var new_clouds= preload("res://smokerz.tscn").instantiate()
-		#self.connect("toMove",(new_clouds.test_to_zero()))
-		%PathFollow2D.progress_ratio += 0.01
-		#print(%PathFollow2D.progress_ratio)
-		new_clouds.global_position = %PathFollow2D.global_position
-		add_child(new_clouds)
-		#print("spawned" + str (count))
+#func spawn_clouds():
+	#while %PathFollow2D.progress_ratio <= 0.99:
+	##for i in range(10):
+		#count += 1
+		#var new_clouds= preload("res://smokerz.tscn").instantiate()
+		##self.connect("toMove",(new_clouds.test_to_zero()))
+		#%PathFollow2D.progress_ratio += 0.01
+		##print(%PathFollow2D.progress_ratio)
+		#new_clouds.global_position = %PathFollow2D.global_position
+		#add_child(new_clouds)
+		##print("spawned" + str (count))
 
 
 func _on_timer_timeout():

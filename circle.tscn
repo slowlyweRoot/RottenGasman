@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://se7rx6lkcf85"]
+
+[ext_resource type="Script" path="res://circle.gd" id="1_umbaw"]
+[ext_resource type="Texture2D" uid="uid://b7saourakkrd2" path="res://assets/smoke_01.tga" id="1_un8i0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7xjbo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bdqmu"]
+radius = 1920.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7itwm"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ofsmu"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 45.0
+scale_max = 45.0
+color = Color(0, 0.623529, 0, 1)
+anim_speed_min = 15.0
+anim_speed_max = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3vif1"]
+radius = 1868.25
+
+[node name="Circle" type="StaticBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("1_umbaw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_7xjbo")
+disabled = true
+
+[node name="mainCircle" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mainCircle"]
+shape = SubResource("CircleShape2D_bdqmu")
+debug_color = Color(0, 0.639216, 0.360784, 0.235294)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_7itwm")
+process_material = SubResource("ParticleProcessMaterial_ofsmu")
+texture = ExtResource("1_un8i0")
+lifetime = 60.0
+
+[node name="smokeCircle" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="smokeCircle"]
+shape = SubResource("CircleShape2D_3vif1")

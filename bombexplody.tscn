@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://ddpyw1tbaaign"]
+[gd_scene load_steps=24 format=3 uid="uid://ddpyw1tbaaign"]
 
 [ext_resource type="Texture2D" uid="uid://dy2raeq22fc2y" path="res://assets/particlesIfNeeded/fire_02.png" id="1_4dml5"]
 [ext_resource type="Script" path="res://bombexplody.gd" id="1_dbiug"]
+[ext_resource type="Texture2D" uid="uid://b14l3yjx7u32k" path="res://assets/particlesIfNeeded/flare_01.png" id="3_uyfdp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rvvw3"]
 size = Vector2(64, 64)
@@ -41,10 +42,75 @@ scale_min = 0.2
 scale_max = 0.3
 scale_curve = SubResource("CurveTexture_djr5g")
 scale_over_velocity_max = 944.97
-color = Color(1, 0.470588, 0.231373, 1)
+color = Color(0, 0.45098, 0, 1)
 color_ramp = SubResource("GradientTexture1D_66tlp")
 alpha_curve = SubResource("CurveTexture_v5io7")
 emission_curve = SubResource("CurveTexture_6cw13")
+hue_variation_max = 0.09
+
+[sub_resource type="Curve" id="Curve_r40rr"]
+_data = [Vector2(0.0133333, 1), 0.0, 0.0, 0, 0, Vector2(0.173333, 0.450549), 0.0, 0.0, 0, 0, Vector2(0.293333, 1), 0.0, 0.0, 0, 0, Vector2(0.453333, 0.428571), 0.0, 0.0, 0, 0, Vector2(0.606667, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 0.483516), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_4ai18"]
+curve = SubResource("Curve_r40rr")
+
+[sub_resource type="Curve" id="Curve_8ekrx"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(0.973333, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x1u6k"]
+curve = SubResource("Curve_8ekrx")
+
+[sub_resource type="Curve" id="Curve_2iafk"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, -8.89111, 0, 1, Vector2(0.22, -0.956044), 0.0, 0.0, 0, 0, Vector2(0.473333, 1), 0.0, 0.0, 0, 0, Vector2(0.706667, -1), 0.0, 0.0, 0, 0, Vector2(0.806667, 0.956044), 0.0, 0.0, 0, 0, Vector2(0.94, -1), -14.6703, 0.0, 1, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_lrwp2"]
+curve = SubResource("Curve_2iafk")
+
+[sub_resource type="Curve" id="Curve_t2yrn"]
+min_value = -1.0
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.506667, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_8db4i"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_iqqjf"]
+curve_x = SubResource("Curve_t2yrn")
+curve_y = SubResource("Curve_8db4i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tts7g"]
+lifetime_randomness = 0.13
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 25.45
+angle_min = -90.0
+angle_max = 90.0
+angle_curve = SubResource("CurveTexture_x1u6k")
+direction = Vector3(1, 1, 0)
+spread = 90.0
+initial_velocity_min = -45.0
+initial_velocity_max = 45.0
+angular_velocity_min = -48.54
+angular_velocity_max = 48.54
+angular_velocity_curve = SubResource("CurveTexture_lrwp2")
+directional_velocity_min = -112.26
+directional_velocity_max = 98.08
+directional_velocity_curve = SubResource("CurveXYZTexture_iqqjf")
+gravity = Vector3(0, 0, 0)
+radial_accel_max = 100.0
+scale_min = 0.1
+scale_max = 0.2
+color = Color(0, 0.752941, 0, 1)
+alpha_curve = SubResource("CurveTexture_4ai18")
+hue_variation_min = -0.2
 hue_variation_max = 0.09
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uc0fv"]
@@ -61,17 +127,26 @@ collision_mask = 0
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+visible = false
 shape = SubResource("RectangleShape2D_rvvw3")
 disabled = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 7
 process_material = SubResource("ParticleProcessMaterial_37pm8")
 texture = ExtResource("1_4dml5")
 one_shot = true
 explosiveness = 0.85
 randomness = 1.0
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="GPUParticles2D"]
+show_behind_parent = true
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_tts7g")
+texture = ExtResource("3_uyfdp")
+explosiveness = 1.0
+randomness = 1.0
+visibility_rect = Rect2(-32, -32, 64, 64)
 
 [node name="Area2D" type="Area2D" parent="." groups=["explosion"]]
 collision_layer = 8

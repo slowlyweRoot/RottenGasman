@@ -12,7 +12,7 @@ func _process(delta):
 	
 
 func _on_timer_timeout():
-	#$StaticBody2D.set_collision_layer_value(1,true)
+	$".".set_collision_layer_value(1,true)
 	#BOMB EFFECT SPEED INCREASE MY WAY
 	# print(str($Sprite2D.material.get_shader_parameter("detonatetimer"))+"&&" + self.name)
 	$Sprite2D.material.set_shader_parameter("detonatetimer", value2)
