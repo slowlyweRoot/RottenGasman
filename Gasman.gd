@@ -5,6 +5,7 @@ var bombDamage=1
 var timer = 0
 var rewindList = []
 var isRewinding = false
+var circleDamage = 1
 func _ready():
 	pass
 func get_input():
@@ -65,10 +66,17 @@ func bomb():
 	#print("added bomb")
 
 func take_damage():	
-	print("kek")
+	print("bomb damage")
 	playerHealth = playerHealth - bombDamage
 	if playerHealth <=0:
 		queue_free()
 	#animate take damage fzzz
 
+func take_circle_damage():
+	print("outside circle taking damage")
+	playerHealth -= circleDamage
 
+
+func _on_area_2d_area_exited(area):
+	if area.is_in_group("circle"):
+		take_circle_damage()

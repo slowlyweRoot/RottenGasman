@@ -3,6 +3,7 @@ var value : float = 1.0
 var value2 : float = 1.0
 var detonateTime : int = 5
 var isDetonated :bool=false
+var isAlreadyDamagedToPlayer :bool = false
 
 func _process(delta):
 	#$Sprite2D.material.set_shader_parameter("detonatetimer", value2)
@@ -22,7 +23,7 @@ func _on_timer_timeout():
 		isDetonated=true
 		$Sprite2D.visible=false
 		_explod3()
-		await get_tree().create_timer(1).timeout 
+		await get_tree().create_timer(0.5).timeout 
 		queue_free()
 		#print($RayCast2D.testOfHowmanyBombs)
 	#elif value2 > detonateTime+2 :
@@ -99,6 +100,5 @@ func _explod3():
 			const BOMB_EXPLODE2 =preload("res://bombexplody.tscn")
 			var newExplosion2 = BOMB_EXPLODE2.instantiate()	
 			newExplosion2.global_position = self.global_position + (listofVectors[i-1]*j)			
-			self.add_child(newExplosion2)
+			self.call_deferred("add_child", newExplosion2)
 		
-
