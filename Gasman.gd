@@ -1,11 +1,14 @@
 extends CharacterBody2D
 @export var speed:int= 600
-@export var playerHealth:int=999
-var bombDamage=1
+@export var playerHealth:int=100
+var bombDamage=30
 var timer = 0
 var rewindList = []
 var isRewinding = false
-var circleDamage = 1
+var circleDamage = 5
+var isOutsideCircle=false
+var circleTimer=0
+
 func _ready():
 	pass
 func get_input():
@@ -14,7 +17,15 @@ func get_input():
 
 func _physics_process(delta):
 	get_input()
-	move_and_slide()	
+	move_and_slide()
+	if isOutsideCircle==true:
+		circleTimer+=1
+		if circleTimer%30==0:
+			
+			take_circle_damage()
+	elif isOutsideCircle==false:
+		circleTimer=0	
+		
 	if velocity.y > 0:
 		$Sprite2D2/AnimationPlayer.play("walk_down")
 	elif velocity.y < 0:
@@ -73,10 +84,9 @@ func take_damage():
 	#animate take damage fzzz
 
 func take_circle_damage():
-	print("outside circle taking damage")
-	playerHealth -= circleDamage
+	playerHealth = playerHealth - circleDamage
+	print("taking damage")
+	if playerHealth <=0:
+		queue_free()
 
 
-func _on_area_2d_area_exited(area):
-	if area.is_in_group("circle"):
-		take_circle_damage()

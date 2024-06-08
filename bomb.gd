@@ -57,9 +57,10 @@ func _on_timer_timeout():
 func take_damage():	
 	if !isDetonated:
 		_explod3()
+		$Sprite2D.visible=false
 		isDetonated=true
 		print("exploded")
-		await get_tree().create_timer(1).timeout 
+		await get_tree().create_timer(0.5).timeout 
 		queue_free()
 	else:pass
 

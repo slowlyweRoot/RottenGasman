@@ -10,8 +10,7 @@ size = Vector2(64, 64)
 size = Vector2(12, 12)
 
 [node name="Crate" type="StaticBody2D"]
-disable_mode = 1
-collision_layer = 32771
+collision_layer = 3
 script = ExtResource("1_psopa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
