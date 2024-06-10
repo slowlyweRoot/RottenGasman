@@ -1,5 +1,4 @@
 extends Node2D
-var count = 0
 
 const CRATESPAWNPOINT:Vector2 = Vector2(-1904,-1840)
 const CRATESPAWNPOINT2:Vector2 = Vector2(-1904,-1777)
@@ -30,7 +29,7 @@ func spawn_crates():
 					var newCrate = CRATE.instantiate()
 					newCrate.global_position = CRATESPAWNPOINT2 + Vector2((j*128),(i*128))
 					self.add_child(newCrate)
-			
+
 	
 func spawn_circle():
 	const CIRCLE = preload("res://circle.tscn")

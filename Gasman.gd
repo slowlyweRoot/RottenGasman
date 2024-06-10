@@ -27,15 +27,15 @@ func _physics_process(delta):
 		circleTimer=0	
 		
 	if velocity.y > 0:
-		$Sprite2D2/AnimationPlayer.play("walk_down")
+		%AnimationPlayer.play("walk_down")
 	elif velocity.y < 0:
-		$Sprite2D2/AnimationPlayer.play("walk_up")
+		%AnimationPlayer.play("walk_up")
 	elif velocity.x > 0 :
-		$Sprite2D2/AnimationPlayer.play("walk_right")
+		%AnimationPlayer.play("walk_right")
 	elif velocity.x < 0 :
-		$Sprite2D2/AnimationPlayer.play("walk_left")
+		%AnimationPlayer.play("walk_left")
 	else:
-		$Sprite2D2/AnimationPlayer.play("RESET")
+		%AnimationPlayer.play("RESET")
 	
 	timer += delta
 	if timer>0.1 &&isRewinding ==false:

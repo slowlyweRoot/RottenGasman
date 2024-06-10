@@ -1,104 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://dfqs4annapwko"]
+[gd_scene load_steps=11 format=3 uid="uid://dfqs4annapwko"]
 
 [ext_resource type="Script" path="res://Gasman.gd" id="1_1qe6d"]
-[ext_resource type="Texture2D" uid="uid://bxsekdmgnqpw" path="res://assets/Green-Cap-Character-16x18.png" id="2_cn1yl"]
 [ext_resource type="Texture2D" uid="uid://qs17a38ig0w8" path="res://assets/sokoban_tilesheet.png" id="3_kkb4i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2g03"]
 radius = 25.14
-
-[sub_resource type="Animation" id="Animation_fu3vw"]
-resource_name = "idle_front"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_eabus"]
-resource_name = "walk_down"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [1, 2, 0]
-}
-
-[sub_resource type="Animation" id="Animation_d3ces"]
-resource_name = "walk_left"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [6, 7, 8]
-}
-
-[sub_resource type="Animation" id="Animation_n17y4"]
-resource_name = "walk_right"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [10, 11, 9]
-}
-
-[sub_resource type="Animation" id="Animation_wwubl"]
-resource_name = "walk_up"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [3, 4, 5]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jmha5"]
-_data = {
-"idle_front": SubResource("Animation_fu3vw"),
-"walk_down": SubResource("Animation_eabus"),
-"walk_left": SubResource("Animation_d3ces"),
-"walk_right": SubResource("Animation_n17y4"),
-"walk_up": SubResource("Animation_wwubl")
-}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_huksy"]
 radius = 25.0799
@@ -208,18 +114,6 @@ position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_f2g03")
 debug_color = Color(1, 0.0102092, 0.030341, 0.42)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 1
-texture = ExtResource("2_cn1yl")
-hframes = 3
-vframes = 4
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-libraries = {
-"": SubResource("AnimationLibrary_jmha5")
-}
-
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 34817
 collision_mask = 34817
@@ -251,6 +145,7 @@ vframes = 8
 frame = 65
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D2"]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_ss7qo")
 }
