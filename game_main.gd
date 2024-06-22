@@ -11,6 +11,7 @@ func _ready():
 func _physics_process(delta):
 	if Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene() 
+		reset_globalVariables()
 	%fpscounter.text = str(Engine.get_frames_per_second())
 func spawn_crates():
 	
@@ -36,3 +37,12 @@ func spawn_circle():
 	var newCircle = CIRCLE.instantiate()
 	newCircle.global_position = Vector2((randi_range(-1000,1000)),(randi_range(-1000,1000)))
 	self.add_child(newCircle)
+
+func reset_globalVariables():
+	Global.bombAmount=2
+	Global.activeBombAmount=0
+	Global.bombExplosionTime=12.
+	Global.explosionSizeUnit=0
+	Global.playerHealth=120.
+	Global.rewindAmount=1
+	Global.playerSpeed=250.

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://se7rx6lkcf85"]
+[gd_scene load_steps=6 format=3 uid="uid://se7rx6lkcf85"]
 
 [ext_resource type="Script" path="res://circle.gd" id="1_umbaw"]
+[ext_resource type="Texture2D" uid="uid://b43ybu6nwgvuy" path="res://assets/test.png" id="2_r3ttm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xjbo"]
 
@@ -27,6 +28,7 @@ collision_layer = 34816
 collision_mask = 34816
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="mainCircle"]
+visible = false
 shape = SubResource("CircleShape2D_bdqmu")
 debug_color = Color(0, 0.639216, 0.360784, 0.235294)
 
@@ -35,7 +37,44 @@ collision_layer = 256
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="smokeCircle"]
+visible = false
 shape = SubResource("CircleShape2D_3vif1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(9.6, 9.456)
+texture = ExtResource("2_r3ttm")
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+offset_left = -2836.22
+offset_top = -1591.42
+offset_right = -2387.22
+offset_bottom = -1279.42
+scale = Vector2(5.21041, 12.986)
+color = Color(0.133333, 0.215686, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Sprite2D"]
+offset_left = 484.295
+offset_top = -1698.15
+offset_right = 933.295
+offset_bottom = -1386.15
+scale = Vector2(5.21041, 12.986)
+color = Color(0.133333, 0.215686, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Sprite2D"]
+offset_left = -1059.29
+offset_top = 488.497
+offset_right = -610.295
+offset_bottom = 800.497
+scale = Vector2(5.21041, 12.986)
+color = Color(0.133333, 0.215686, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Sprite2D"]
+offset_left = -1123.4
+offset_top = -4532.98
+offset_right = -674.397
+offset_bottom = -4220.98
+scale = Vector2(5.21041, 12.986)
+color = Color(0.133333, 0.215686, 0, 1)
 
 [connection signal="body_entered" from="mainCircle" to="." method="_on_main_circle_body_entered"]
 [connection signal="body_exited" from="mainCircle" to="." method="_on_main_circle_body_exited"]

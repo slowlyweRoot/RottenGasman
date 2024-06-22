@@ -10,6 +10,7 @@ size = Vector2(64, 64)
 size = Vector2(12, 12)
 
 [node name="Crate" type="StaticBody2D"]
+top_level = true
 collision_layer = 32771
 script = ExtResource("1_psopa")
 

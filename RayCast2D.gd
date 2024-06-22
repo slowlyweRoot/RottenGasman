@@ -1,9 +1,11 @@
 extends RayCast2D
 
-var testOfHowmanyBombs = 2
+var testOfHowmanyBombs:int = 2
+
 
 
 func _physics_process(delta):
+	target_position = Vector2(Global.explosionSizeUnit*64,0)
 	
 	var cast_point := target_position	
 	if is_colliding():

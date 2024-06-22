@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://cnxnolbsltoud"]
+
+[ext_resource type="Script" path="res://upgrades/upassets/upgrades.gd" id="1_gb8fm"]
+[ext_resource type="Texture2D" uid="uid://cyqy22k5iamqp" path="res://assets/particlesIfNeeded/star_01.png" id="2_d51fm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qh1u6"]
+radius = 4.0
+
+[sub_resource type="Curve" id="Curve_3lbtg"]
+_data = [Vector2(0, 0.758242), 0.0, 0.0, 0, 0, Vector2(0.113333, 0.230769), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e1x5t"]
+curve = SubResource("Curve_3lbtg")
+
+[sub_resource type="Gradient" id="Gradient_5rc8j"]
+colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0.945098, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wmq37"]
+gradient = SubResource("Gradient_5rc8j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nobg4"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 35.0
+initial_velocity_max = 35.0
+orbit_velocity_min = 0.539
+orbit_velocity_max = 0.539
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -53.93
+linear_accel_max = 35.0
+scale_min = 0.05
+scale_max = 0.15
+color_ramp = SubResource("GradientTexture1D_wmq37")
+alpha_curve = SubResource("CurveTexture_e1x5t")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jkb1m"]
+radius = 16.0
+
+[node name="upgrades" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_gb8fm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qh1u6")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.75, 0.75)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 1
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_nobg4")
+texture = ExtResource("2_d51fm")
+lifetime = 2.0
+explosiveness = 0.68
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 512
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jkb1m")
+debug_color = Color(0.851033, 0.000866931, 0.89754, 0.42)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
