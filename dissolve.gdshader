@@ -13,7 +13,6 @@ void fragment() {
 	
 	if(noise_pixel.r > value){
 		COLOR.a-=0.20f+sin(TIME*3.)/5.;
-		
 	}
 	else{
 		COLOR = current_pixel;
